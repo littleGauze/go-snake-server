@@ -1,13 +1,15 @@
 package internal
 
 import (
-	"github.com/name5566/leaf/module"
 	"server/base"
+
+	"github.com/name5566/leaf/module"
 )
 
 var (
 	skeleton = base.NewSkeleton()
 	ChanRPC  = skeleton.ChanRPCServer
+	Game     = new(GameMain)
 )
 
 type Module struct {
@@ -16,6 +18,7 @@ type Module struct {
 
 func (m *Module) OnInit() {
 	m.Skeleton = skeleton
+	go Game.Init()
 }
 
 func (m *Module) OnDestroy() {
